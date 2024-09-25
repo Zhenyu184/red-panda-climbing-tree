@@ -1,0 +1,18 @@
+# cargo
+/src-tauri/target/
+/src-tauri/src/main.rs.bk
+
+# tauri
+/src-tauri/gen/schemas
+
+# directory
+/dist
+/build
+/node_modules
+
+# specific extension
+*.tmp
+*.bak
+*.log
+*.dmg
+*.app
