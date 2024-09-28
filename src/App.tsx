@@ -1,15 +1,19 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import { invoke } from "@tauri-apps/api/tauri";
+// react and tauri
 import "./App.css";
+import { useState } from "react";
+import { invoke } from "@tauri-apps/api/tauri";
 
+// rete.js
 import { createEditor } from "./editor";
 import { useRete } from "rete-react-plugin";
 
+// assets
+import reactLogo from "./assets/react.svg";
+
 function App() {
-    const [outputMsg, setOutputMsg] = useState("");
     const [name, setName] = useState("");
-    const [ref] = useRete(createEditor);
+    const [outputMsg, setOutputMsg] = useState("");
+    const [editor] = useRete(createEditor);
 
     async function handle1() {
         setOutputMsg(await invoke("handler1", { name }));
@@ -54,10 +58,10 @@ function App() {
                         Greet
                     </button>
                     <button type="button" onClick={() => handle2()} className="greet-button">
-                        Greet 2
+                        Start
                     </button>
                     <button type="button" onClick={() => handle3()} className="greet-button">
-                        Greet 3
+                        test
                     </button>
                 </div>
 
@@ -65,7 +69,7 @@ function App() {
             </div>
 
             <div className="editor-space">
-                <div ref={ref} style={{ height: "100%", width: "100%" }}></div>
+                <div ref={editor} style={{ height: "100%", width: "100%" }}></div>
             </div>
         </div>
     );
