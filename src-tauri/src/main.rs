@@ -20,16 +20,26 @@ fn fetch(url: &str) -> String {
 }
 
 #[tauri::command]
-fn greet(name: &str) -> String {
-    let body = fetch("https://www.rust-lang.org");
-    println!("body = {body:?}");
+fn handler1(name: &str) -> String {
+    let _body = fetch("https://www.rust-lang.org");
+    // println!("body = {_body:?}");
 
-    format!("Hello, {}! You've been greeted from Rust!", name)
+    format!("Hello, {}! You've been handler 1 from Rust!", name)
+}
+
+#[tauri::command]
+fn handler2(name: &str) -> String {
+    format!("Hello, {}! This is handler2.", name)
+}
+
+#[tauri::command]
+fn handler3(name: &str) -> String {
+    format!("Hello, {}! This is handler3.", name)
 }
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![greet])
+        .invoke_handler(tauri::generate_handler![handler1, handler2, handler3])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

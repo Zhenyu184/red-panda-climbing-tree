@@ -4,12 +4,19 @@ import { invoke } from "@tauri-apps/api/tauri";
 import "./App.css";
 
 function App() {
-    const [greetMsg, setGreetMsg] = useState("");
+    const [outputMsg, setOutputMsg] = useState("");
     const [name, setName] = useState("");
 
-    async function greet() {
-        // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-        setGreetMsg(await invoke("greet", { name }));
+    async function handle1() {
+        setOutputMsg(await invoke("handler1", { name }));
+    }
+
+    async function handle2() {
+        setOutputMsg(await invoke("handler2", { name }));
+    }
+
+    async function handle3() {
+        setOutputMsg(await invoke("handler3", { name }));
     }
 
     return (
@@ -42,22 +49,39 @@ function App() {
 
             <p>Click on the Tauri, Vite, and React logos to learn more.</p>
 
-            <form
-                className="row"
-                onSubmit={(e) => {
-                    e.preventDefault();
-                    greet();
-                }}
-            >
+            <form className="row">
                 <input
                     id="greet-input"
                     onChange={(e) => setName(e.currentTarget.value)}
                     placeholder="Enter a name..."
                 />
-                <button type="submit">Greet</button>
             </form>
 
-            <p>{greetMsg}</p>
+            <div className="row">
+                <button
+                    type="button"
+                    onClick={() => handle1()}
+                    className="greet-button"
+                >
+                    Greet
+                </button>
+                <button
+                    type="button"
+                    onClick={() => handle2()}
+                    className="greet-button"
+                >
+                    Greet 2
+                </button>
+                <button
+                    type="button"
+                    onClick={() => handle3()}
+                    className="greet-button"
+                >
+                    Greet 3
+                </button>
+            </div>
+
+            <p>{outputMsg}</p>
         </div>
     );
 }
