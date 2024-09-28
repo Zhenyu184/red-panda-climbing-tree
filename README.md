@@ -21,3 +21,4 @@ pnpm tauri build
 
 Tauri commands：https://tauri.app/v1/guides/features/command
 Rust web scraping：https://5xcampus.com/posts/hello-world-conf-rust-web-scraping
+See more keys and their definitions at: https://doc.rust-lang.org/cargo/reference/manifest.html
