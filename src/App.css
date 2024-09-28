@@ -85,7 +85,7 @@ button {
     font-weight: 500;
     font-family: inherit;
     color: #0f0f0f;
-    background-color: #ffffff;
+    background-color: #a8a8a8;
     transition: border-color 0.25s;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
 }
@@ -97,6 +97,7 @@ button {
 button:hover {
     border-color: #396cd8;
 }
+
 button:active {
     border-color: #396cd8;
     background-color: #e8e8e8;
@@ -123,8 +124,8 @@ button {
 
     input,
     button {
-        color: #ffffff;
-        background-color: #2d2d2d98;
+        color: #000000;
+        background-color: #57575798;
     }
     button:active {
         background-color: #0f0f0f69;

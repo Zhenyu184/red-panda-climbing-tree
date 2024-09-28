@@ -69,7 +69,7 @@ function App() {
             </div>
 
             <div className="editor-space">
-                <div ref={editor} style={{ height: "100%", width: "100%" }}></div>
+                <div ref={editor} className="rete" style={{ height: "100%", width: "100%" }}></div>
             </div>
         </div>
     );
