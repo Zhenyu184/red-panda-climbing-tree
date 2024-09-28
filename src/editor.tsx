@@ -1,16 +1,10 @@
 import { createRoot } from "react-dom/client";
 import { NodeEditor, GetSchemes, ClassicPreset } from "rete";
 import { AreaPlugin, AreaExtensions } from "rete-area-plugin";
-import {
-    ConnectionPlugin,
-    Presets as ConnectionPresets,
-} from "rete-connection-plugin";
+import { ConnectionPlugin, Presets as ConnectionPresets } from "rete-connection-plugin";
 import { ReactPlugin, Presets, ReactArea2D } from "rete-react-plugin";
 
-type Schemes = GetSchemes<
-    ClassicPreset.Node,
-    ClassicPreset.Connection<ClassicPreset.Node, ClassicPreset.Node>
->;
+type Schemes = GetSchemes<ClassicPreset.Node, ClassicPreset.Connection<ClassicPreset.Node, ClassicPreset.Node>>;
 type AreaExtra = ReactArea2D<Schemes>;
 
 export async function createEditor(container: HTMLElement) {

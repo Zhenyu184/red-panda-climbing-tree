@@ -1,11 +1,3 @@
 {
-    "cSpell.words": [
-        "gimli",
-        "proto",
-        "reqwest",
-        "serde",
-        "tauri",
-        "tlsv",
-        "vite"
-    ]
+    "cSpell.words": ["Avenir", "gimli", "proto", "reqwest", "serde", "tauri", "tlsv", "vite"]
 }
