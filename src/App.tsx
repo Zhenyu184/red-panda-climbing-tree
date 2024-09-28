@@ -3,9 +3,14 @@ import reactLogo from "./assets/react.svg";
 import { invoke } from "@tauri-apps/api/tauri";
 import "./App.css";
 
+import { createEditor } from "./editor";
+import { useRete } from "rete-react-plugin";
+
 function App() {
     const [outputMsg, setOutputMsg] = useState("");
     const [name, setName] = useState("");
+
+    const [ref] = useRete(createEditor);
 
     async function handle1() {
         setOutputMsg(await invoke("handler1", { name }));
@@ -23,7 +28,14 @@ function App() {
         <div className="container">
             <h1>Welcome to Tauri!</h1>
 
-            <div className="row">
+            <div className="App">
+                <div
+                    ref={ref}
+                    style={{ height: "100vh", width: "100vw" }}
+                ></div>
+            </div>
+
+            <div className="editor-space">
                 <a href="https://vitejs.dev" target="_blank">
                     <img
                         src="/vite.svg"
