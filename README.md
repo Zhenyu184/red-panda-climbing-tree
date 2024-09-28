@@ -6,8 +6,19 @@ This template should help get you started developing with Tauri, React and Types
 
 -   [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
 
-## Build
+## Preliminary work
 
-pnpm i
+-   Install Rust: `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
+-   Install Tauri CLI: `npm install -g @tauri-apps/cli`
+-   Install Tauri CLI: `pnpm i`
+
+## Build tauri
+
 pnpm tauri dev
 pnpm tauri build
+
+## Refer to
+
+Tauri commands：https://tauri.app/v1/guides/features/command
+Rust web scraping：https://5xcampus.com/posts/hello-world-conf-rust-web-scraping
+See more keys and their definitions at: https://doc.rust-lang.org/cargo/reference/manifest.html
