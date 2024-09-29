@@ -1,0 +1,58 @@
+.clock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #242424;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.date {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.time {
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: baseline; /* 調整垂直對齊 */
+}
+
+.milliseconds {
+    font-size: 16px; /* 調整毫秒部分的字體大小 */
+    margin-left: 2px; /* 調整與秒數之間的間距 */
+}
+
+.adjustment {
+    font-size: 16px; /* 調整微調文字的字體大小 */
+    margin-left: 5px; /* 調整與毫秒之間的間距 */
+    color: #FFD700; /* 設定調整文字為金黃色 */
+}
+
+/* 微調按鈕區域樣式 */
+.adjust-buttons {
+    display: flex;
+    gap: 10px; /* 按鈕之間的間距 */
+    margin-top: 10px;
+}
+
+.adjust-buttons button {
+    padding: 5px 10px;
+    font-size: 14px;
+    color: white;
+    background-color: #616161;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.adjust-buttons button:hover {
+    background-color: #187c9e; /* 滑鼠移過按鈕時改變顏色 */
+}
+
+.adjust-buttons button:active {
+    background-color: #11e1f0; /* 按下按鈕時的顏色 */
+}
+
