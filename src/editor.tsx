@@ -7,7 +7,15 @@ import { AutoArrangePlugin, Presets as ArrangePresets } from 'rete-auto-arrange-
 import { DataflowEngine } from 'rete-engine';
 import { ContextMenuExtra, ContextMenuPlugin, Presets as ContextMenuPresets } from 'rete-context-menu-plugin';
 
+import { invoke } from '@tauri-apps/api/tauri';
+
 const socket = new ClassicPreset.Socket('socket');
+
+async function handle2() {
+    const name = 'chris';
+    await invoke('handler2', { name });
+    console.log('call handle2');
+}
 
 class NumberNode extends ClassicPreset.Node<
     {},
@@ -74,6 +82,7 @@ class AddNode extends ClassicPreset.Node<
     }
 
     job(a?: number, b?: number) {
+        handle2();
         return (a || 0) + (b || 0);
     }
 }

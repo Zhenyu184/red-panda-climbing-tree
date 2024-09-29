@@ -29,6 +29,7 @@ fn handler1(name: &str) -> String {
 
 #[tauri::command]
 fn handler2(name: &str) -> String {
+    println!("run handler2 {}", name); //
     format!("Hello, {}! This is handler2.", name)
 }
 
