@@ -6,49 +6,9 @@ import { invoke } from '@tauri-apps/api/tauri';
 import { createEditor } from './editor';
 import { useRete } from 'rete-react-plugin';
 
-// assets
+// assets and compo
+import Clock from './clock';
 import reactLogo from './assets/react.svg';
-
-function Clock() {
-    const [dateTime, setDateTime] = useState(new Date());
-
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setDateTime(new Date());
-        }, 1000);
-
-        return () => {
-            clearInterval(timer);
-        };
-    }, []);
-
-    const formatDate = (date: any) => {
-        const options = {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            weekday: 'short',
-        };
-        return date.toLocaleDateString('zh-TW', options);
-    };
-
-    const formatTime = (date: any) => {
-        const options = {
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-            hour12: false,
-        };
-        return date.toLocaleTimeString('zh-TW', options);
-    };
-
-    return (
-        <div className='clock'>
-            <div className='date'>{formatDate(dateTime)}</div>
-            <div className='time'>{formatTime(dateTime)}</div>
-        </div>
-    );
-}
 
 function App() {
     const [name, setName] = useState('');
@@ -84,7 +44,7 @@ function App() {
                     </a>
                 </div>
 
-                <p>Click on the Tauri, Vite, and React logos to learn more.</p>
+                <p>This is a tool to visualize the web crawler process. Although it is still under development.</p>
 
                 <form className='row'>
                     <input id='greet-input' onChange={(e) => setName(e.currentTarget.value)} placeholder='Enter a name...' />
