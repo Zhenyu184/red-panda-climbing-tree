@@ -1,22 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import './Clock.css'; // 匯入時鐘樣式
+import { useState, useEffect } from 'react';
+import './Clock.css';
 
 function Clock() {
     const [dateTime, setDateTime] = useState(new Date());
-    const [adjustment, setAdjustment] = useState(0); // 用來儲存時間微調值 (以毫秒為單位)
+    const [adjustment, setAdjustment] = useState(0);
 
-    // 每隔 10 毫秒更新一次時間，並加入 adjustment 微調值
     useEffect(() => {
         const timer = setInterval(() => {
             setDateTime(new Date(Date.now() + adjustment));
-        }, 10); // 更新頻率設為 10 毫秒
+        }, 10);
 
         return () => {
             clearInterval(timer);
         };
     }, [adjustment]); // 當 adjustment 改變時重新執行 effect
 
-    // 格式化日期
+    // format date
     const formatDate = (date: any) => {
         const options = {
             year: 'numeric',
