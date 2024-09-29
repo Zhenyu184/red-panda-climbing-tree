@@ -41,11 +41,39 @@
 }
 
 .sidebar {
+    height: 100%;
     width: 300px;
     padding: 20px;
     flex-shrink: 0;
+    flex-direction: column;
     background-color: #161616;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding-top: 20px;
+}
+
+.clock {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #3f3f3f;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.clock .date {
+    font-size: 0.9em;
+    color: #cacaca;
+    margin-bottom: 5px;
+}
+
+.clock .time {
+    font-size: 1.2em;
+    color: #a5a5a5;
 }
 
 .editor-space {
