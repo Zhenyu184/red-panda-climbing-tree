@@ -60,13 +60,21 @@ class AddNode extends ClassicPreset.Node<
         const rightControl = this.inputs.right?.control as ClassicPreset.InputControl<'number'>;
 
         const { left, right } = inputs;
-        const value = (left ? left[0] : leftControl.value || 0) + (right ? right[0] : rightControl.value || 0);
+        const leftInputData = left ? left[0] : leftControl.value || 0;
+        const rightInputData = right ? right[0] : rightControl.value || 0;
+
+        const value = this.job(leftInputData, rightInputData);
 
         this.controls.value.setValue(value);
-
-        if (this.update) this.update(this.controls.value);
+        if (this.update) {
+            this.update(this.controls.value);
+        }
 
         return { value };
+    }
+
+    job(a?: number, b?: number) {
+        return (a || 0) + (b || 0);
     }
 }
 
@@ -130,6 +138,7 @@ export async function createEditor(container: HTMLElement) {
         return context;
     });
 
+    // interface layout
     const a = new NumberNode(1, process);
     const b = new NumberNode(1, process);
     const c = new AddNode(process, (c) => area.update('control', c.id));

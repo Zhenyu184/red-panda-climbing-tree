@@ -6,7 +6,7 @@ import { invoke } from '@tauri-apps/api/tauri';
 import { createEditor } from './editor';
 import { useRete } from 'rete-react-plugin';
 
-// assets and compo
+// assets and component
 import Clock from './clock';
 import reactLogo from './assets/react.svg';
 
@@ -29,6 +29,7 @@ function App() {
 
     return (
         <div className='container'>
+            {/* sidebar */}
             <div className='sidebar'>
                 <h1>Hi Rad panda!</h1>
 
@@ -63,11 +64,14 @@ function App() {
                 </div>
 
                 <p>{outputMsg}</p>
+
+                {/* clock */}
                 <div className='sidebar-footer'>
                     <Clock />
                 </div>
             </div>
 
+            {/* editor space */}
             <div className='editor-space'>
                 <div ref={editor} className='rete' style={{ height: '100%', width: '100%' }}></div>
             </div>

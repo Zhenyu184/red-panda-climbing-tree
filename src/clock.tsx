@@ -1,19 +1,30 @@
 import { useState, useEffect } from 'react';
-import './Clock.css';
+import './clock.css';
 
+// use local time
 function Clock() {
     const [dateTime, setDateTime] = useState(new Date());
-    const [adjustment, setAdjustment] = useState(0);
+    const [compensate, setCompensate] = useState(0);
 
     useEffect(() => {
         const timer = setInterval(() => {
-            setDateTime(new Date(Date.now() + adjustment));
+            setDateTime(new Date(Date.now() + compensate));
         }, 10);
 
         return () => {
             clearInterval(timer);
         };
-    }, [adjustment]); // 當 adjustment 改變時重新執行 effect
+    }, [compensate]);
+
+    const microAdjust = (offset: number) => {
+        console.log(`micro adjust clock +${offset} ms`);
+        setCompensate(compensate + offset);
+    };
+
+    const resetAdjustment = () => {
+        console.log(`reset clock`);
+        setCompensate(0);
+    };
 
     // format date
     const formatDate = (date: any) => {
@@ -26,45 +37,31 @@ function Clock() {
         return date.toLocaleDateString('zh-TW', options);
     };
 
-    // 格式化時間，並顯示毫秒
+    // format time
     const formatTime = (date: Date) => {
         const hours = date.getHours().toString().padStart(2, '0');
         const minutes = date.getMinutes().toString().padStart(2, '0');
         const seconds = date.getSeconds().toString().padStart(2, '0');
-        const milliseconds = date.getMilliseconds().toString().padStart(3, '0'); // 確保毫秒為 3 位數格式
+        const milliseconds = date.getMilliseconds().toString().padStart(3, '0');
 
-        // 顯示毫秒並格式化顯示時間，將微調值用 (+/- Xms) 顯示在時間後面
         return (
             <>
                 {`${hours}:${minutes}:${seconds}.`}
                 <span className='milliseconds'>{milliseconds}</span>
-                {/* 當 adjustment 不為 0 時顯示微調值 */}
-                {adjustment !== 0 && (
-                    <span className='adjustment'>{adjustment > 0 ? ` (+${adjustment}ms)` : ` (${adjustment}ms)`}</span>
+                {compensate !== 0 && (
+                    <span className='adjustment'>{compensate > 0 ? ` (+${compensate}ms)` : ` (${compensate}ms)`}</span>
                 )}
             </>
         );
-    };
-
-    // 處理微調按鈕的點擊事件
-    const handleAdjust = (amount: number) => {
-        setAdjustment(adjustment + amount); // 增加或減少微調值
-    };
-
-    // 重置微調按鈕的事件處理
-    const resetAdjustment = () => {
-        setAdjustment(0); // 重置微調值為 0
     };
 
     return (
         <div className='clock'>
             <div className='date'>{formatDate(dateTime)}</div>
             <div className='time'>{formatTime(dateTime)}</div>
-
-            {/* 微調按鈕區域 */}
             <div className='adjust-buttons'>
-                <button onClick={() => handleAdjust(10)}>+10ms</button>
-                <button onClick={() => handleAdjust(-10)}>-10ms</button>
+                <button onClick={() => microAdjust(10)}>+10ms</button>
+                <button onClick={() => microAdjust(-10)}>-10ms</button>
                 <button onClick={resetAdjustment}>reset</button>
             </div>
         </div>

@@ -1,3 +1,14 @@
 {
-    "cSpell.words": ["Avenir", "gimli", "proto", "reqwest", "serde", "tauri", "tlsv", "vite"]
+    "cSpell.words": [
+        "Avenir",
+        "connectioncreated",
+        "connectionremoved",
+        "gimli",
+        "proto",
+        "reqwest",
+        "serde",
+        "tauri",
+        "tlsv",
+        "vite"
+    ]
 }
