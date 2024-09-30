@@ -17,6 +17,25 @@ async function handle2() {
     console.log('call handle2');
 }
 
+class RequestNode extends ClassicPreset.Node<
+    {},
+    { value: ClassicPreset.Socket },
+    { text: ClassicPreset.InputControl<'text'> }
+> {
+    height = 135;
+    width = 200;
+
+    constructor(initial: string, change?: (value: string) => void) {
+        super('RequestNode');
+        this.addControl('text', new ClassicPreset.InputControl('text', { initial, change }));
+        this.addOutput('value', new ClassicPreset.Output(socket, 'output name'));
+    }
+
+    data(): { value: string } {
+        return { value: this.controls.text.value || '' };
+    }
+}
+
 class NumberNode extends ClassicPreset.Node<
     {},
     { value: ClassicPreset.Socket },
@@ -89,7 +108,7 @@ class AddNode extends ClassicPreset.Node<
 
 class Connection<A extends Node, B extends Node> extends ClassicPreset.Connection<A, B> {}
 
-type Node = NumberNode | AddNode;
+type Node = NumberNode | AddNode | RequestNode;
 type ConnProps = Connection<NumberNode, AddNode> | Connection<AddNode, AddNode>;
 type Schemes = GetSchemes<Node, ConnProps>;
 
@@ -151,13 +170,16 @@ export async function createEditor(container: HTMLElement) {
     const a = new NumberNode(1, process);
     const b = new NumberNode(1, process);
     const c = new AddNode(process, (c) => area.update('control', c.id));
+    const d = new RequestNode('Initial text', process);
 
     const con1 = new Connection(a, 'value', c, 'left');
     const con2 = new Connection(b, 'value', c, 'right');
+    const con3 = new Connection(d, 'value', c, 'right');
 
     await editor.addNode(a);
     await editor.addNode(b);
     await editor.addNode(c);
+    await editor.addNode(d);
 
     await editor.addConnection(con1);
     await editor.addConnection(con2);
