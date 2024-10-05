@@ -11,10 +11,8 @@ import { invoke } from '@tauri-apps/api/tauri';
 
 const socket = new ClassicPreset.Socket('socket');
 
-async function handle2() {
-    const name = 'chris';
-    await invoke('handler2', { name });
-    console.log('call handle2');
+async function request_f() {
+    await invoke('request', { 'https://www.rust-lang.org': String});
 }
 
 class RequestNode extends ClassicPreset.Node<
@@ -23,7 +21,7 @@ class RequestNode extends ClassicPreset.Node<
     { text: ClassicPreset.InputControl<'text'> }
 > {
     height = 135;
-    width = 200;
+    width = 300;
 
     constructor(initial: string, change?: (value: string) => void) {
         super('RequestNode');
@@ -33,6 +31,11 @@ class RequestNode extends ClassicPreset.Node<
 
     data(): { value: string } {
         return { value: this.controls.text.value || '' };
+    }
+
+    job() {
+        request_f()
+        return;
     }
 }
 
@@ -101,7 +104,6 @@ class AddNode extends ClassicPreset.Node<
     }
 
     job(a?: number, b?: number) {
-        handle2();
         return (a || 0) + (b || 0);
     }
 }
@@ -170,7 +172,7 @@ export async function createEditor(container: HTMLElement) {
     const a = new NumberNode(1, process);
     const b = new NumberNode(1, process);
     const c = new AddNode(process, (c) => area.update('control', c.id));
-    const d = new RequestNode('Initial text', process);
+    const d = new RequestNode('https://www.rust-lang.org', process);
 
     const con1 = new Connection(a, 'value', c, 'left');
     const con2 = new Connection(b, 'value', c, 'right');

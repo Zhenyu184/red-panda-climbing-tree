@@ -19,8 +19,9 @@ function App() {
         setOutputMsg(await invoke('handler1', { name }));
     }
 
-    async function handle2() {
-        setOutputMsg(await invoke('handler2', { name }));
+    async function request_f() {
+        const url = "https://example.com"
+        setOutputMsg(await invoke('request_cmd', { url }));
     }
 
     async function handle3() {
@@ -55,7 +56,7 @@ function App() {
                     <button type='button' onClick={() => handle1()} className='greet-button'>
                         Greet
                     </button>
-                    <button type='button' onClick={() => handle2()} className='greet-button'>
+                    <button type='button' onClick={() => request_f()} className='greet-button'>
                         Start
                     </button>
                     <button type='button' onClick={() => handle3()} className='greet-button'>

@@ -20,7 +20,21 @@ fn fetch(url: &str) -> String {
 }
 
 #[tauri::command]
+fn request(url: &str) -> String  {
+    println!("run request, url = {}", url);
+
+    if url.trim().is_empty() {
+        return String::from("url is empty");
+    }
+
+    println!("run handler2 {}", url);
+
+    format!("Hello, {}! This is handler2.", url)
+}
+
+#[tauri::command]
 fn handler1(name: &str) -> String {
+    println!("run handler1 {}", name);
     let _body = fetch("https://www.rust-lang.org");
     // println!("body = {_body:?}");
 
@@ -28,19 +42,20 @@ fn handler1(name: &str) -> String {
 }
 
 #[tauri::command]
-fn handler2(name: &str) -> String {
-    println!("run handler2 {}", name); //
-    format!("Hello, {}! This is handler2.", name)
+fn request_cmd(url: &str) -> String {
+    println!("run request command ");
+    format!("Hello, ! This is handler2.")
 }
 
 #[tauri::command]
 fn handler3(name: &str) -> String {
+    println!("run handler3 {}", name);
     format!("Hello, {}! This is handler3.", name)
 }
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![handler1, handler2, handler3])
+        .invoke_handler(tauri::generate_handler![handler1, request_cmd, handler3, request])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
